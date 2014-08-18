@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="blocks/my_courses/db" VERSION="20120122" COMMENT="XMLDB file for Moodle blocks/my_courses"
+<XMLDB PATH="blocks/my_enrolled_courses/db" VERSION="20120122" COMMENT="XMLDB file for Moodle blocks/my_enrolled_courses"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="block_my_courses" COMMENT="My course block">
+    <TABLE NAME="block_my_enrolled_courses" COMMENT="My course block">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="userid"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="courseid"/>

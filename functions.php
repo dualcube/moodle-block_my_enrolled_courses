@@ -6,7 +6,7 @@ function show_courses($courseids) {
   
   if(! empty($courseids)) {
     foreach($courseids as $courseid) {
-      $DB->delete_records('block_my_courses', array('userid' => $USER->id, 'courseid' => $courseid, 'hide' => 1));
+      $DB->delete_records('block_my_enrolled_courses', array('userid' => $USER->id, 'courseid' => $courseid, 'hide' => 1));
     }
   }
 }
@@ -17,14 +17,14 @@ function hide_courses($courseids) {
   
   if(! empty($courseids)) {
     foreach($courseids as $courseid) {
-      $hidden_course = $DB->get_record('block_my_courses', array('userid' => $USER->id, 'courseid' => $courseid, 'hide' => 1));
+      $hidden_course = $DB->get_record('block_my_enrolled_courses', array('userid' => $USER->id, 'courseid' => $courseid, 'hide' => 1));
       
       if(empty($hidden_course)) {
         $course = new stdClass();
         $course->userid = $USER->id;
         $course->courseid = $courseid;
         $course->hide = 1;
-        $DB->insert_record('block_my_courses', $course);
+        $DB->insert_record('block_my_enrolled_courses', $course);
       }
     }
   }
@@ -39,7 +39,7 @@ function get_visible_courses() {
   
   if(! empty($enroled_courses)) {
     foreach($enroled_courses as $id => $course) {
-      $hidden_course = $DB->get_record('block_my_courses', array('userid' => $USER->id, 'courseid' => $id, 'hide' => 1));
+      $hidden_course = $DB->get_record('block_my_enrolled_courses', array('userid' => $USER->id, 'courseid' => $id, 'hide' => 1));
       if(empty($hidden_course)) {
         $visible_courses[$id] = $course;
       }
@@ -47,9 +47,9 @@ function get_visible_courses() {
   }
   
   $html = '';
-  $lable = get_string('none', 'block_my_courses');
+  $lable = get_string('none', 'block_my_enrolled_courses');
   if(! empty($visible_courses))
-    $lable = get_string('visible_lable', 'block_my_courses'). '(' . count($visible_courses) . ')';
+    $lable = get_string('visible_lable', 'block_my_enrolled_courses'). '(' . count($visible_courses) . ')';
   
   $html .= html_writer::start_tag('optgroup', array('label' => $lable));
   
@@ -72,7 +72,7 @@ function get_hidden_courses() {
   
   if(! empty($enroled_courses)) {
     foreach($enroled_courses as $id => $course) {
-      $hidden_course = $DB->get_record('block_my_courses', array('userid' => $USER->id, 'courseid' => $id, 'hide' => 1));
+      $hidden_course = $DB->get_record('block_my_enrolled_courses', array('userid' => $USER->id, 'courseid' => $id, 'hide' => 1));
       if(! empty($hidden_course)) {
         $hidden_courses[$id] = $course;
       }
@@ -80,9 +80,9 @@ function get_hidden_courses() {
   }
   
   $html = '';
-  $lable = get_string('none', 'block_my_courses');
+  $lable = get_string('none', 'block_my_enrolled_courses');
   if(! empty($hidden_courses))
-    $lable = get_string('hidden_lable', 'block_my_courses'). '(' . count($hidden_courses) . ')';
+    $lable = get_string('hidden_lable', 'block_my_enrolled_courses'). '(' . count($hidden_courses) . ')';
   
   $html .= html_writer::start_tag('optgroup', array('label' => $lable));
   
@@ -109,7 +109,7 @@ function get_visible_courses_in_block() {
   $html .= html_writer::start_tag('ul', array('id' => 'course_list_in_block'));
   if(! empty($enroled_courses)) {
     foreach($enroled_courses as $id => $course) {
-      $hidden_course = $DB->get_record('block_my_courses', array('userid' => $USER->id, 'courseid' => $id, 'hide' => 1));
+      $hidden_course = $DB->get_record('block_my_enrolled_courses', array('userid' => $USER->id, 'courseid' => $id, 'hide' => 1));
       if(empty($hidden_course)) {        
         $html .= html_writer::start_tag('div', array('class' => 'li_course'));
         
@@ -132,7 +132,7 @@ function get_visible_courses_in_block() {
 function remove_older_course_records($enroled_courses) {
   global $DB, $USER;
   
-  $hidden_courses = $DB->get_records('block_my_courses', array('userid' => $USER->id, 'hide' => 1));
+  $hidden_courses = $DB->get_records('block_my_enrolled_courses', array('userid' => $USER->id, 'hide' => 1));
   if(! empty($hidden_courses)) {
     $enroled_course_ids = array();
     foreach($enroled_courses as $enroled_course)
@@ -140,7 +140,7 @@ function remove_older_course_records($enroled_courses) {
     
     foreach($hidden_courses as $hidden_course) {
       if(! in_array($hidden_course->courseid, $enroled_course_ids)) {
-        $DB->delete_records('block_my_courses', array('id' => $hidden_course->id));
+        $DB->delete_records('block_my_enrolled_courses', array('id' => $hidden_course->id));
       }
     }
   }
