@@ -1,0 +1,32 @@
+div.li_course {
+  word-break: break-all;
+  font-weight: bold;
+}
+
+div#showbtn, #hidebtn {
+  height: 10em;
+  margin-top: 3em;
+  text-align: center;
+}
+
+td#visiblecourses, #hiddencourses {
+  width: 40%;
+}
+
+td#showorhide {
+  width: 10%;
+}
+
+select#visible, #hidden {
+  width: 100%;
+}
+
+ul#course_list_in_block {
+   list-style-type: none;
+   margin-bottom: 0.5cm;
+   margin-left: 0.2cm;
+}
+
+li.course_list_item_in_block {
+  margin: .5em 0;
+}
