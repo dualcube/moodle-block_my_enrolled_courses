@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<libraries>
+  <library>
+    <location>js/</location>
+    <name>jQuery JavaScript Library</name>
+    <license>MIT</license>
+    <version>v1.10.2</version>
+    <licenseversion></licenseversion>
+  </library>
+  <library>
+    <location>js/</location>
+    <name>jQuery UI</name>
+    <license>MIT</license>
+    <version>v1.11.4</version>
+    <licenseversion></licenseversion>
+  </library>
+</libraries>

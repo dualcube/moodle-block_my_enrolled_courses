@@ -1,0 +1,10 @@
+.block_my_enrolled_courses .li_course {word-break: break-all;font-weight: bold;}
+.block_my_enrolled_courses #showbtn, #hidebtn {height: 10em;margin-top: 3em;text-align: center;}
+.block_my_enrolled_courses #showhidecourses {width: 100%;}
+.block_my_enrolled_courses #visiblecourses {width: 45%;}
+.block_my_enrolled_courses #hiddencourses {width: 45%;}
+.block_my_enrolled_courses #showorhide {width: 10%;}
+.block_my_enrolled_courses #visible, #hidden {width: 100%;}
+.block_my_enrolled_courses #course_list_in_block {list-style-type: none;margin-bottom: 0.5cm;margin-left: 0.2cm;}
+.block_my_enrolled_courses .course_list_item_in_block {margin: .5em 0;}
+.li_course .colapsible_icon {float: right; cursor: pointer;}
