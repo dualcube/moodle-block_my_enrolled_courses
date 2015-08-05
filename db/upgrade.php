@@ -24,7 +24,9 @@
  */
 function xmldb_block_my_enrolled_courses_upgrade($oldversion) {
     global $CFG, $DB;
+    
     $dbman = $DB->get_manager();
+    
     if ($oldversion < 2014102202) {
         $table = new xmldb_table('block_myenrolledcoursesorder');
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
@@ -37,5 +39,6 @@ function xmldb_block_my_enrolled_courses_upgrade($oldversion) {
         }
         upgrade_block_savepoint(true, 2014102202, 'my_enrolled_courses');
     }
+    
     return true;
 }

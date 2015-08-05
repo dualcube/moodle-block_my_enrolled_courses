@@ -52,7 +52,8 @@ class block_my_enrolled_courses extends block_base {
         $this->content->text = $html;
 
         $url = new moodle_url($CFG->wwwroot . '/blocks/my_enrolled_courses/showhide.php', array('contextid' => $this->context->id));
-        $link = html_writer::link($url, get_string('showhide', 'block_my_enrolled_courses'));
+        $showhidetext = get_string('showhide', 'block_my_enrolled_courses');
+        $link = html_writer::link($url, $showhidetext);
         $this->content->footer = $link;
 
         return $this->content;

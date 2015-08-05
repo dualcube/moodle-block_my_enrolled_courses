@@ -37,7 +37,8 @@ function block_my_enrolled_courses_show_courses($courseids) {
         if (! empty($coursesorder)) {
             if (is_string($coursesorder->courseorder)) {
                 $coursesinorder = json_decode($coursesorder->courseorder, true);
-                if(! empty(array_diff($courseids, $coursesinorder))) {
+                $courses_diff = array_diff($courseids, $coursesinorder);
+                if(! empty($courses_diff)) {
                     $courseids = array_merge($courseids, $coursesinorder);
                     $record->id = $coursesorder->id;
                     $record->courseorder = json_encode($courseids);
@@ -77,7 +78,8 @@ function block_my_enrolled_courses_hide_courses($courseids) {
                 $coursesinorder = json_decode($coursesorder->courseorder, true);
                 $courseids = array_diff($coursesinorder, $courseids);
                 $record->id = $coursesorder->id;
-                $record->courseorder = json_encode(array_values($courseids));
+                $courseids = array_values($courseids);
+                $record->courseorder = json_encode($courseids);
                 $DB->update_record('block_myenrolledcoursesorder', $record);
             }
         } else {
@@ -182,12 +184,14 @@ function block_my_enrolled_courses_visible_in_block() {
     $html = '';
     $html .= html_writer::start_tag('ul', array('id' => 'course_list_in_block'));
     if (! empty($coursesinorder)) {
-        $courses = $DB->get_records_sql('SELECT id, fullname FROM {course} WHERE id IN (' . implode(', ', $coursesinorder) . ')');
+    		$coursesinorderstr = implode(', ', $coursesinorder);
+        $courses = $DB->get_records_sql('SELECT id, fullname FROM {course} WHERE id IN (' . $coursesinorderstr . ')');
         foreach ($coursesinorder as $id) {
             $url = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $id));
             $content = html_writer::start_tag('div', array('class' => 'li_course', 'data-id' => $id));
             $anchor = html_writer::link($url, $courses[$id]->fullname);
-            $courseicon = $OUTPUT->pix_icon('i/course', get_string('course'));
+            $courseicon = get_string('course');
+            $courseicon = $OUTPUT->pix_icon('i/course', $courseicon);
             $colapsible = html_writer::start_tag('span', array('class' => 'colapsible_icon'));
             $colapsible .= get_string('colapsibleplus', 'block_my_enrolled_courses');
             $colapsible .= html_writer::end_tag('span');
@@ -259,7 +263,10 @@ function block_my_enrolled_courses_manage_courses($enroledcourses) {
         if(! empty($diff1) || ! empty($diff2)) {
             $neworder = new stdClass();
             $neworder->id = $courseinorderobj->id;
-            $neworder->courseorder = json_encode(array_diff(array_merge(array_diff($courseinorder, $diff1), $diff2), $hiddencourseids));
+            $result = array_diff($courseinorder, $diff1);
+            $result = array_merge($result, $diff2);
+            $result = array_diff($result, $hiddencourseids);
+            $neworder->courseorder = json_encode($result);
             $DB->update_record('block_myenrolledcoursesorder', $neworder);
         }
     } else {

@@ -28,7 +28,8 @@ require_once('locallib.php');
 
 global $DB, $CFG, $USER, $PAGE;
 
-$SITE = $DB->get_record('course', array('id' => optional_param('courseid', SITEID, PARAM_INT)), '*', MUST_EXIST);
+$courseid = optional_param('courseid', SITEID, PARAM_INT);
+$SITE = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
 $contextid = required_param('contextid', PARAM_INT);
 $url = new moodle_url($CFG->wwwroot . '/blocks/my_enrolled_courses/showhide.php', array('contextid' => $contextid));
 list($context, $course, $cm) = get_context_info_array($contextid);
@@ -38,10 +39,13 @@ require_login($SITE, false, $cm);
 $PAGE->set_url($url);
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('standard');
-$PAGE->navbar->add(get_string('block_name', 'block_my_enrolled_courses'), $url);
-$PAGE->set_title($SITE->shortname.': '.get_string('block_name', 'block_my_enrolled_courses').': '.
-  get_string('showhide_page_title', 'block_my_enrolled_courses'));
-$PAGE->set_heading($SITE->fullname.': '.get_string('block_name', 'block_my_enrolled_courses'));
+$blockname = get_string('block_name', 'block_my_enrolled_courses');
+$PAGE->navbar->add($blockname, $url);
+$title = $SITE->shortname.': '.get_string('block_name', 'block_my_enrolled_courses').': '.
+  get_string('showhide_page_title', 'block_my_enrolled_courses');
+$PAGE->set_title($title);
+$heading = $SITE->fullname.': '.get_string('block_name', 'block_my_enrolled_courses');
+$PAGE->set_heading($heading);
 
 $PAGE->requires->js('/blocks/my_enrolled_courses/js/jquery-1.10.2.js');
 $PAGE->requires->js('/blocks/my_enrolled_courses/js/button-disable.js');
@@ -65,12 +69,14 @@ if (optional_param('hide', false, PARAM_BOOL) && confirm_sesskey()) {
 
 echo $OUTPUT->header();
 // Print heading.
-echo $OUTPUT->heading(get_string('showhide_page_title', 'block_my_enrolled_courses'));
+$pagetitle = get_string('showhide_page_title', 'block_my_enrolled_courses');
+echo $OUTPUT->heading($pagetitle);
 
 $html = '';
 $html .= html_writer::start_tag('div', array('id' => 'showhide_section'));
 $html .= html_writer::start_tag('form', array('id' => 'showhide_form', 'method' => 'post', 'action' => $url));
-$html .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'sesskey', 'value' => sesskey()));
+$sesskey = sesskey();
+$html .= html_writer::empty_tag('input', array('type' => 'hidden', 'name' => 'sesskey', 'value' => $sesskey));
 $html .= html_writer::start_tag('table', array('id' => 'showhidecourses', 'class' => 'generaltable block_my_enrolled_courses'));
 $html .= html_writer::start_tag('tr');
 $html .= html_writer::start_tag('td', array('id' => 'visiblecourses', 'class' => 'block_my_enrolled_courses'));
@@ -89,12 +95,14 @@ $html .= html_writer::end_tag('div');
 $html .= html_writer::end_tag('td');
 $html .= html_writer::start_tag('td', array('id' => 'showorhide', 'class' => 'block_my_enrolled_courses'));
 $html .= html_writer::start_tag('div', array('id' => 'showbtn', 'class' => 'block_my_enrolled_courses'));
+$submittext = $OUTPUT->larrow().get_string('showcourse', 'block_my_enrolled_courses');
 $html .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'show', 'id' => 'show',
-    'value' => $OUTPUT->larrow().get_string('showcourse', 'block_my_enrolled_courses')));
+    'value' => $submittext));
 $html .= html_writer::end_tag('div');
 $html .= html_writer::start_tag('div', array('id' => 'hidebtn', 'class' => 'block_my_enrolled_courses'));
+$submittext = $OUTPUT->rarrow().get_string('hidecourse', 'block_my_enrolled_courses');
 $html .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'hide', 'id' => 'hide',
-    'value' => $OUTPUT->rarrow().get_string('hidecourse', 'block_my_enrolled_courses')));
+    'value' => $submittext));
 $html .= html_writer::end_tag('div');
 $html .= html_writer::end_tag('td');
 $html .= html_writer::start_tag('td', array('id' => 'hiddencourses', 'class' => 'block_my_enrolled_courses'));
