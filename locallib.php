@@ -256,7 +256,7 @@ function block_my_enrolled_courses_manage_courses($enroledcourses) {
     }
     $courseinorderobj = $DB->get_record('block_myenrolledcoursesorder', array('userid' => $USER->id));
     if(! empty($courseinorderobj)) {
-        $courseinorder = json_decode($courseinorderobj->courseorder);
+        $courseinorder = json_decode($courseinorderobj->courseorder, true);
         $diff1 = array_diff($courseinorder, $enroledcourseids);
         $diff2 = array_diff($enroledcourseids, $courseinorder);
         asort($diff2);
