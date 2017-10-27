@@ -47,9 +47,10 @@ class block_my_enrolled_courses extends block_base {
         }
 
         $this->content = new stdClass();
-
-        $html = block_my_enrolled_courses_visible_in_block();
-        $this->content->text = $html;
+        if (function_exists('block_my_enrolled_courses_visible_in_block')) {
+            $html = block_my_enrolled_courses_visible_in_block();
+            $this->content->text = $html;
+        }
 
         $url = new moodle_url($CFG->wwwroot . '/blocks/my_enrolled_courses/showhide.php', array('contextid' => $this->context->id));
         $showhidetext = get_string('showhide', 'block_my_enrolled_courses');
