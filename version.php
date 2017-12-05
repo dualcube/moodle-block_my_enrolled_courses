@@ -19,13 +19,13 @@
  *
  * @package    block
  * @subpackage block_my_enrolled_courses
- * @copyright  Dualcube (http://dualcube.com)
+ * @copyright  Dualcube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2015073103;
+$plugin->version   = 2015073104;
 $plugin->component = 'block_my_enrolled_courses';
 $plugin->requires  = 2013051400;
 $plugin->release = '2.4.1 (Build: 2015073100)';
