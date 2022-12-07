@@ -19,7 +19,7 @@
  *
  * @package    block
  * @subpackage block_my_enrolled_courses
- * @copyright  Dualcube (http://dualcube.com)
+ * @copyright  Dualcube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -47,7 +47,8 @@ $PAGE->set_title($title);
 $heading = $SITE->fullname.': '.get_string('block_name', 'block_my_enrolled_courses');
 $PAGE->set_heading($heading);
 
-$PAGE->requires->js('/blocks/my_enrolled_courses/js/jquery-1.10.2.js');
+// $PAGE->requires->js('/blocks/my_enrolled_courses/js/jquery-1.10.2.js');
+$PAGE->requires->jquery();
 $PAGE->requires->js('/blocks/my_enrolled_courses/js/button-disable.js');
 $PAGE->requires->css('/blocks/my_enrolled_courses/style.css');
 

@@ -19,7 +19,7 @@
  *
  * @package    block
  * @subpackage block_my_enrolled_courses
- * @copyright  Dualcube (http://dualcube.com)
+ * @copyright  Dualcube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once('../../config.php');
