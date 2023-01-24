@@ -19,7 +19,7 @@
  *
  * @package    block
  * @subpackage block_my_enrolled_courses
- * @copyright  Dualcube (https://dualcube.com)
+ * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -192,7 +192,7 @@ function block_my_enrolled_courses_visible_in_block() {
             $anchor = html_writer::link($url, $courses[$id]->fullname);
             $courseicon = get_string('course');
             $courseicon = $OUTPUT->pix_icon('i/course', $courseicon);
-            $colapsible = html_writer::start_tag('span', array('class' => 'colapsible_icon'));
+            $colapsible = html_writer::start_tag('span', array('class' => 'expandable_icon'));
             $colapsible .= get_string('colapsibleplus', 'block_my_enrolled_courses');
             $colapsible .= html_writer::end_tag('span');
             $content .= "$courseicon $anchor $colapsible";
@@ -256,7 +256,7 @@ function block_my_enrolled_courses_manage_courses($enroledcourses) {
     }
     $courseinorderobj = $DB->get_record('block_myenrolledcoursesorder', array('userid' => $USER->id));
     if(! empty($courseinorderobj)) {
-        $courseinorder = json_decode($courseinorderobj->courseorder);
+        $courseinorder = json_decode($courseinorderobj->courseorder, true);
         $diff1 = array_diff($courseinorder, $enroledcourseids);
         $diff2 = array_diff($enroledcourseids, $courseinorder);
         asort($diff2);

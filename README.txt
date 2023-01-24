@@ -7,4 +7,4 @@ This block can be added to any page of a Moodle site. It is perfectly compatible
 
 To install, place all files in /blocks/my_courses and visit /admin/index.php in your browser.
 
-This block is written by Dualcube <admin@dualcube.com>.
+This block is written by DualCube <admin@dualcube.com>.

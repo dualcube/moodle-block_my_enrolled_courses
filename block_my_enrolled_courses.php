@@ -19,13 +19,13 @@
  *
  * @package    block
  * @subpackage block_my_enrolled_courses
- * @copyright  Dualcube (https://dualcube.com)
+ * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 require_once('locallib.php');
-require_once('../config.php');
+
 class block_my_enrolled_courses extends block_base {
     public function init() {
         $this->title = get_string('pluginname', 'block_my_enrolled_courses');
@@ -33,11 +33,7 @@ class block_my_enrolled_courses extends block_base {
 
     public function get_content() {
         global $CFG, $PAGE;
-        
-        $PAGE->requires->js('/blocks/my_enrolled_courses/js/sorting.js');
-        $PAGE->requires->jquery();
-        // $PAGE->requires->data_for_js('wwwroot', $CFG->wwwroot);
-        // $PAGE->requires->js_call_amd('block_my_enrolled_courses/shorting', 'shorting');
+        $PAGE->requires->js_call_amd('block_my_enrolled_courses/myenrolledcourses', 'sorting');
         $PAGE->requires->css('/blocks/my_enrolled_courses/style.css');
 
         if ($this->content !== null) {

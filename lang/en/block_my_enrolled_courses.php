@@ -19,7 +19,7 @@
  *
  * @package    block
  * @subpackage block_my_enrolled_courses
- * @copyright  Dualcube (https://dualcube.com)
+ * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,6 +30,7 @@ $string['block_name'] = 'My enrolled courses';
 $string['showhide'] = 'Show/Hide courses';
 $string['showcourse'] = 'Show courses';
 $string['hidecourse'] = 'Hide courses';
+$string['submitandback'] = 'Save and Back';
 $string['visible_lable'] = 'Visible courses';
 $string['hidden_lable'] = 'Hidden courses';
 $string['showhide_page_title'] = 'Show/Hide courses';
