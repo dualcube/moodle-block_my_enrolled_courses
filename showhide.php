@@ -46,9 +46,6 @@ $title = $SITE->shortname.': '.get_string('block_name', 'block_my_enrolled_cours
 $PAGE->set_title($title);
 $heading = $SITE->fullname.': '.get_string('block_name', 'block_my_enrolled_courses');
 $PAGE->set_heading($heading);
-
-// $PAGE->requires->js('/blocks/my_enrolled_courses/js/jquery-1.10.2.js');
-// $PAGE->requires->js('/blocks/my_enrolled_courses/js/button-disable.js');
 $PAGE->requires->js_call_amd('block_my_enrolled_courses/myenrolledcourses', 'disablebutten');
 $PAGE->requires->css('/blocks/my_enrolled_courses/style.css');
 
