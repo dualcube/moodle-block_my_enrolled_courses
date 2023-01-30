@@ -23,10 +23,22 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2023012402;
-$plugin->component = 'block_my_enrolled_courses';
-$plugin->requires  = 2013051400;
-$plugin->release = '2.5 (Build: 2023012400)';
-$plugin->maturity = MATURITY_STABLE;
+$services = array(
+    'moodle_block_my_enrolled_courses' => array(
+        'functions' => array('moodle_my_enrolled_courses_shorting'),
+        'requiredcapability' => '',
+        'restrictedusers' => 0,
+        'enabled' => 1,
+    )
+);
+$functions = array(
+    'moodle_my_enrolled_courses_shorting' => array(
+        'classname' => 'moodle_my_enrolled_courses_shorting_external',
+        'methodname' => 'my_enrolled_courses_shorting',
+        'classpath' => 'blocks/my_enrolled_courses/externallib.php',
+        'description' => 'Get shorting data',
+        'type' => 'read',
+        'ajax' => true,
+        'loginrequired' => true
+    )
+);
