@@ -1,20 +1,33 @@
-define(['jquery', 'core/ajax','core/url'], function($, ajax, url) {
+define(['jquery', 'core/ajax', 'core/sortable_list'], function($, ajax, SortableList ) {
   return{
     sorting: function(){
+        
+        $('ul#course_list_in_block').find('.course_list_item_in_block').each(function(){
+            $(this).attr({ "role": "button",  "data-drag-type": "move"});
+        })
+        
+        new SortableList('ul#course_list_in_block');
+        $('ul#course_list_in_block > *').on(SortableList.EVENTS.DROP, function(evt, info) {
             var ids = {};
+            var courseids = [];
             var index = 0;
-            $('#course_list_in_block li').each(function() {
-                var id = $(this).find('.li_course').data('id');
-                ids[index] = id;
-                ++ index;
-            });
-            var rooturl = url.fileUrl("/blocks/my_enrolled_courses/sorting.ajax.php", "");
-            $.post(
-                rooturl ,
-                {
-                    courseids: ids
+            $('.li_course').each(function() {
+                var id = $(this).data('id');
+                if(id != null && !courseids.includes(id) ){
+                    courseids[index] = id;
+                    ++ index;
                 }
-            );
+            });
+            ids.courseids = JSON.stringify(courseids);
+            var promises = ajax.call([
+                {
+                    methodname: 'moodle_my_enrolled_courses_shorting',
+                    args: ids
+                }
+            ])[0];
+           
+        });
+
         $( ".expandable_icon" ).unbind('click');
         $( ".expandable_icon" ).click(function() {
         var icon = $( this ).text();
