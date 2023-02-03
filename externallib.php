@@ -15,10 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * external library
  *
- * @package    block
- * @subpackage block_my_enrolled_courses
+ * @package    block_my_enrolled_courses
  * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -62,13 +61,9 @@ class moodle_my_enrolled_courses_shorting_external extends external_api {
             $neworder->id = $order->id;
             $DB->update_record('block_myenrolledcoursesorder', $neworder);
         }
-        echo true;
         return json_encode($neworder);
         die;
     }
-
-
-
 
     /**
      * Returns description of method result value

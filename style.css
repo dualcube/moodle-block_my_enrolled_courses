@@ -1,12 +1,90 @@
-.li_course {word-break: break-all; font-weight: bold;}
-#showbtn, #hidebtn {height: 10em;margin-top: 3em; text-align: center;}
-#showhidecourses {width: 100%;}
-#visiblecourses {width: 45%;}
-#hiddencourses {width: 45%;}
-#showorhide {width: 10%;}
-#visible, #hidden {width: 100%;}
-#course_list_in_block {list-style: none; margin-bottom: 0.5cm; margin-left: 0.2cm;}
-.course_list_item_in_block {list-style: none; margin: .5em 0;}
-.li_course .expandable_icon {float: right; cursor: pointer;}
-.saveandback {text-align: center; }
-.saveandback a {background-color: red; color: white; padding: 0.25rem 1rem;}
+.li_course {
+    word-break: break-all; font-weight: bold;
+}
+#showbtn, #hidebtn {
+    height: 10em;margin-top: 3em; text-align: center;
+}
+#showhidecourses {
+    width: 100%;
+}
+#visiblecourses {
+    width: 45%;
+}
+#hiddencourses {width: 45%;
+}
+#showorhide {
+    width: 10%;
+}
+#visible, #hidden {
+    width: 100%;
+}
+#course_list_in_block {
+    list-style: none; margin-bottom: 0.5cm; margin-left: 0.2cm;
+}
+.course_list_item_in_block {
+    list-style: none; margin: .5em 0;
+}
+.li_course .expandable_icon {
+    float: right; cursor: pointer;
+}
+.saveandback {
+    text-align: center; 
+}
+.saveandback a {
+    background-color: red; color: white; padding: 0.25rem 1rem;
+}
+.li_course {
+    word-break: break-all; font-weight: bold;
+}
+#showbtn, #hidebtn {
+    height: 10em;margin-top: 3em; text-align: center;
+}
+#showhidecourses {
+    width: 100%;
+}
+#visiblecourses {
+    width: 45%;
+}
+#hiddencourses {
+    width: 45%;
+}
+#showorhide {
+    width: 10%;
+}
+#visible, #hidden {
+    width: 100%;
+}
+#course_list_in_block {
+    list-style: none; margin-bottom: 0.5cm; margin-left: 0.2cm;
+}
+.course_list_item_in_block {
+    list-style: none; margin: .5em 0;
+}
+.li_course .expandable_icon {
+    float: right; cursor: pointer;
+}
+.saveandback {
+    text-align: center; 
+}
+.saveandback a {
+    background-color: red; color: white; padding: 0.25rem 1rem;
+}
+.course_list_item_in_block {
+    border: 0.06rem solid #eee;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+.course_list_item_in_block a{
+    color: #000;
+}
+ul:has(.course_list_item_in_block){
+    padding: 0;
+}
+.footer {
+    text-align: center;
+}
+.footer a{
+    border: 0.06rem solid #eee;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}

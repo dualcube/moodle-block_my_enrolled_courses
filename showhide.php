@@ -15,10 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * showhide page
  *
- * @package    block
- * @subpackage block_my_enrolled_courses
+ * @package    block_my_enrolled_courses
  * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -46,7 +45,7 @@ $title = $SITE->shortname.': '.get_string('block_name', 'block_my_enrolled_cours
 $PAGE->set_title($title);
 $heading = $SITE->fullname.': '.get_string('block_name', 'block_my_enrolled_courses');
 $PAGE->set_heading($heading);
-$PAGE->requires->js_call_amd('block_my_enrolled_courses/myenrolledcourses', 'disablebutten');
+$PAGE->requires->js_call_amd('block_my_enrolled_courses/myenrolledcourses', 'showhide');
 $PAGE->requires->css('/blocks/my_enrolled_courses/style.css');
 
 $data = data_submitted();

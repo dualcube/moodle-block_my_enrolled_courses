@@ -2,10 +2,6 @@ define(['jquery', 'core/ajax', 'core/sortable_list'], function($, ajax, Sortable
   return{
     sorting: function(){
         
-        $('ul#course_list_in_block').find('.course_list_item_in_block').each(function(){
-            $(this).attr({ "role": "button",  "data-drag-type": "move"});
-        })
-        
         new SortableList('ul#course_list_in_block');
         $('ul#course_list_in_block > *').on(SortableList.EVENTS.DROP, function(evt, info) {
             var ids = {};
@@ -39,7 +35,7 @@ define(['jquery', 'core/ajax', 'core/sortable_list'], function($, ajax, Sortable
         }
     });
     },
-    disablebutten: function(){
+    showhide: function(){
       $('#hide').attr('disabled', 'disabled');
       $('#visible').change(function() {
           $('#hide').removeAttr('disabled');

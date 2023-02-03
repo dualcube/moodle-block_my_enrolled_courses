@@ -15,10 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * local library
  *
- * @package    block
- * @subpackage block_my_enrolled_courses
+ * @package    block_my_enrolled_courses
  * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -190,12 +189,16 @@ function block_my_enrolled_courses_visible_in_block() {
             $url = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $id));
             $content = html_writer::start_tag('div', array('class' => 'li_course', 'data-id' => $id));
             $anchor = html_writer::link($url, $courses[$id]->fullname);
+            $dragable = html_writer::start_tag('span',array('role'=>'button', 'aria-haspopup'=>'false', 'data-drag-type'=>'move'));
+            $dragable .= html_writer::start_tag('i', array('class'=>'fa fa-arrows'));
+            $dragable .= html_writer::end_tag('i');
+            $dragable .= html_writer::end_tag('span');
             $courseicon = get_string('course');
             $courseicon = $OUTPUT->pix_icon('i/course', $courseicon);
             $colapsible = html_writer::start_tag('span', array('class' => 'expandable_icon'));
             $colapsible .= get_string('colapsibleplus', 'block_my_enrolled_courses');
             $colapsible .= html_writer::end_tag('span');
-            $content .= "$courseicon $anchor $colapsible";
+            $content .= "$dragable $courseicon $anchor $colapsible";
             $content .= html_writer::end_tag('div');
             $content .= block_my_enrolled_courses_course_modules($id);
             $html .= html_writer::tag('li', $content, array('class' => 'course_list_item_in_block'));
