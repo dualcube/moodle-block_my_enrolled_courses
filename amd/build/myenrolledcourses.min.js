@@ -7,14 +7,19 @@ define(['jquery', 'core/ajax', 'core/sortable_list'], function($, ajax, Sortable
             var ids = {};
             var courseids = [];
             var index = 0;
+            var str = '[\"';
             $('.li_course').each(function() {
                 var id = $(this).data('id');
                 if(id != null && !courseids.includes(id) ){
                     courseids[index] = id;
+                    if(index!=0)
+                    str += '\",\"';
+                    str +=  JSON.stringify(id);
                     ++ index;
                 }
             });
-            ids.courseids = JSON.stringify(courseids);
+            str += '\"]';
+            ids.courseids = str;
             var promises = ajax.call([
                 {
                     methodname: 'moodle_my_enrolled_courses_shorting',

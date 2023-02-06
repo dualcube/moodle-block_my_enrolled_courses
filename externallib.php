@@ -51,9 +51,7 @@ class moodle_my_enrolled_courses_shorting_external extends external_api {
         );
         $order = $DB->get_record('block_myenrolledcoursesorder', array('userid' => $USER->id));
         $neworder = new stdClass();
-        $idstring =array_values(array_values($courseids));
-        $ids = explode(',', str_replace(array('[',']'),'',$idstring[0]));
-        $neworder->courseorder = json_encode($ids);
+        $neworder->courseorder = $courseids['courseids'];
         if (empty($order)) {
             $neworder->userid = $USER->id;
             $DB->insert_record('block_myenrolledcoursesorder', $neworder);
