@@ -124,7 +124,7 @@ function block_my_enrolled_courses_get_visible_courses() {
     
     foreach ($visiblecourses as $id => $course) {
 				$html .= html_writer::start_tag('option', array('value' => $id));
-				$html .= $course->fullname;
+				$html .= format_string($course->fullname);
 				$html .= html_writer::end_tag('option');
     }
     
@@ -160,7 +160,7 @@ function block_my_enrolled_courses_get_hidden_courses() {
     if (! empty($hiddencourses)) {
         foreach ($hiddencourses as $id => $course) {
             $html .= html_writer::start_tag('option', array('value' => $id));
-            $html .= $course->fullname;
+            $html .= format_string($course->fullname);
             $html .= html_writer::end_tag('option');
         }
     }
@@ -188,7 +188,7 @@ function block_my_enrolled_courses_visible_in_block() {
         foreach ($coursesinorder as $id) {
             $url = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $id));
             $content = html_writer::start_tag('div', array('class' => 'li_course', 'data-id' => $id));
-            $anchor = html_writer::link($url, $courses[$id]->fullname);
+            $anchor = html_writer::link($url, format_string($courses[$id]->fullname));
             $dragable = html_writer::start_tag('span',array('role'=>'button', 'aria-haspopup'=>'false', 'data-drag-type'=>'move'));
             $dragable .= html_writer::start_tag('i', array('class'=>'fa fa-arrows'));
             $dragable .= html_writer::end_tag('i');
