@@ -15,11 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * access
  *
- * @package    block
- * @subpackage block_my_enrolled_courses
- * @copyright  Dualcube (http://dualcube.com)
+ * @package    block_my_enrolled_courses
+ * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

@@ -15,19 +15,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * services
  *
- * @package    block
- * @subpackage block_my_enrolled_courses
+ * @package    block_my_enrolled_courses
  * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2023020600;
-$plugin->component = 'block_my_enrolled_courses';
-$plugin->requires  = 2016120500;
-$plugin->supported = [32, 42];
-$plugin->release = '2.5 (Build: 2023012700)';
-$plugin->maturity = MATURITY_STABLE;
+$services = array(
+    'moodle_block_my_enrolled_courses' => array(
+        'functions' => array('moodle_my_enrolled_courses_shorting'),
+        'requiredcapability' => '',
+        'restrictedusers' => 0,
+        'enabled' => 1,
+    )
+);
+$functions = array(
+    'moodle_my_enrolled_courses_shorting' => array(
+        'classname' => 'moodle_my_enrolled_courses_shorting_external',
+        'methodname' => 'my_enrolled_courses_shorting',
+        'classpath' => 'blocks/my_enrolled_courses/externallib.php',
+        'description' => 'Get shorting data',
+        'type' => 'read',
+        'ajax' => true,
+        'loginrequired' => true
+    )
+);

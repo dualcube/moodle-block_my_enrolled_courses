@@ -15,11 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * showhide page
  *
- * @package    block
- * @subpackage block_my_enrolled_courses
- * @copyright  Dualcube (http://dualcube.com)
+ * @package    block_my_enrolled_courses
+ * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -46,9 +45,7 @@ $title = $SITE->shortname.': '.get_string('block_name', 'block_my_enrolled_cours
 $PAGE->set_title($title);
 $heading = $SITE->fullname.': '.get_string('block_name', 'block_my_enrolled_courses');
 $PAGE->set_heading($heading);
-
-$PAGE->requires->js('/blocks/my_enrolled_courses/js/jquery-1.10.2.js');
-$PAGE->requires->js('/blocks/my_enrolled_courses/js/button-disable.js');
+$PAGE->requires->js_call_amd('block_my_enrolled_courses/myenrolledcourses', 'showhide');
 $PAGE->requires->css('/blocks/my_enrolled_courses/style.css');
 
 $data = data_submitted();
@@ -104,6 +101,7 @@ $submittext = $OUTPUT->rarrow().get_string('hidecourse', 'block_my_enrolled_cour
 $html .= html_writer::empty_tag('input', array('type' => 'submit', 'name' => 'hide', 'id' => 'hide',
     'value' => $submittext));
 $html .= html_writer::end_tag('div');
+
 $html .= html_writer::end_tag('td');
 $html .= html_writer::start_tag('td', array('id' => 'hiddencourses', 'class' => 'block_my_enrolled_courses'));
 $html .= html_writer::start_tag('div');
@@ -122,6 +120,10 @@ $html .= html_writer::end_tag('td');
 $html .= html_writer::end_tag('tr');
 $html .= html_writer::end_tag('table');
 $html .= html_writer::end_tag('form');
+$html .= html_writer::start_tag('div', array('class'=>'saveandback'));
+$url = new moodle_url($CFG->wwwroot );
+$html .= html_writer::link($url, get_string('submitandback', 'block_my_enrolled_courses'));
+$html .= html_writer::end_tag('div');
 $html .= html_writer::end_tag('div');
 echo $html;
 
