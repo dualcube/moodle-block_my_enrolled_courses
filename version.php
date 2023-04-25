@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_my_enrolled_courses';
-$plugin->version   = 2023020700;
+$plugin->version   = 2023042500;
 $plugin->requires  = 2016120500;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.6 (Build: 2023012700)';
+$plugin->release = '2.7 (Build: 2023042500)';
