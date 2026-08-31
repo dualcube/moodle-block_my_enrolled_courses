@@ -19,7 +19,7 @@
         <INDEX NAME="userid" UNIQUE="false" FIELDS="userid"/>
       </INDEXES>
     </TABLE>    
-    <TABLE NAME="block_myenrolledcoursesorder" COMMENT="My course block, order of the courses">
+    <TABLE NAME="block_my_enrolled_courses_order" COMMENT="My course block, order of the courses">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" NEXT="userid"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" PREVIOUS="id" NEXT="courseorder"/>

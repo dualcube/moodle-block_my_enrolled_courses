@@ -50,10 +50,10 @@ class provider implements
             'hide' => 'privacy:metadata:block_my_enrolled_courses:hide',
         ], 'privacy:metadata:block_my_enrolled_courses');
 
-        $collection->add_database_table('block_myenrolledcoursesorder', [
-            'userid' => 'privacy:metadata:block_myenrolledcoursesorder:userid',
-            'courseorder' => 'privacy:metadata:block_myenrolledcoursesorder:courseorder',
-        ], 'privacy:metadata:block_myenrolledcoursesorder');
+        $collection->add_database_table('block_my_enrolled_courses_order', [
+            'userid' => 'privacy:metadata:block_my_enrolled_courses_order:userid',
+            'courseorder' => 'privacy:metadata:block_my_enrolled_courses_order:courseorder',
+        ], 'privacy:metadata:block_my_enrolled_courses_order');
 
         return $collection;
     }
@@ -72,7 +72,7 @@ class provider implements
                  WHERE c.instanceid = :userid
                    AND c.contextlevel = :contextuser
                    AND (EXISTS (SELECT 1 FROM {block_my_enrolled_courses} h WHERE h.userid = c.instanceid)
-                    OR EXISTS (SELECT 1 FROM {block_myenrolledcoursesorder} o WHERE o.userid = c.instanceid))";
+                    OR EXISTS (SELECT 1 FROM {block_my_enrolled_courses_order} o WHERE o.userid = c.instanceid))";
 
         $contextlist = new contextlist();
         $contextlist->add_from_sql($sql, $params);
@@ -97,7 +97,7 @@ class provider implements
 
         if (
             $DB->record_exists('block_my_enrolled_courses', ['userid' => $context->instanceid])
-                || $DB->record_exists('block_myenrolledcoursesorder', ['userid' => $context->instanceid])
+                || $DB->record_exists('block_my_enrolled_courses_order', ['userid' => $context->instanceid])
         ) {
             $userlist->add_user($context->instanceid);
         }
@@ -123,7 +123,7 @@ class provider implements
                 '',
                 'id, courseid, hide'
             );
-            $order = $DB->get_record('block_myenrolledcoursesorder', ['userid' => $context->instanceid]);
+            $order = $DB->get_record('block_my_enrolled_courses_order', ['userid' => $context->instanceid]);
 
             if (empty($hiddencourses) && empty($order)) {
                 continue;
@@ -163,7 +163,7 @@ class provider implements
         }
 
         $DB->delete_records('block_my_enrolled_courses', ['userid' => $context->instanceid]);
-        $DB->delete_records('block_myenrolledcoursesorder', ['userid' => $context->instanceid]);
+        $DB->delete_records('block_my_enrolled_courses_order', ['userid' => $context->instanceid]);
     }
 
     /**
@@ -181,7 +181,7 @@ class provider implements
             }
 
             $DB->delete_records('block_my_enrolled_courses', ['userid' => $context->instanceid]);
-            $DB->delete_records('block_myenrolledcoursesorder', ['userid' => $context->instanceid]);
+            $DB->delete_records('block_my_enrolled_courses_order', ['userid' => $context->instanceid]);
         }
     }
 
@@ -201,6 +201,6 @@ class provider implements
         }
 
         $DB->delete_records('block_my_enrolled_courses', ['userid' => $context->instanceid]);
-        $DB->delete_records('block_myenrolledcoursesorder', ['userid' => $context->instanceid]);
+        $DB->delete_records('block_my_enrolled_courses_order', ['userid' => $context->instanceid]);
     }
 }

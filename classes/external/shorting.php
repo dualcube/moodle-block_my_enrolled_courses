@@ -58,17 +58,17 @@ class shorting extends external_api {
 
         self::validate_context(context_user::instance($USER->id));
 
-        $order = $DB->get_record('block_myenrolledcoursesorder', ['userid' => $USER->id]);
+        $order = $DB->get_record('block_my_enrolled_courses_order', ['userid' => $USER->id]);
 
         $neworder = new stdClass();
         $neworder->userid = $USER->id;
         $neworder->courseorder = json_encode($params['courseids']);
 
         if (empty($order)) {
-            $neworder->id = $DB->insert_record('block_myenrolledcoursesorder', $neworder);
+            $neworder->id = $DB->insert_record('block_my_enrolled_courses_order', $neworder);
         } else {
             $neworder->id = $order->id;
-            $DB->update_record('block_myenrolledcoursesorder', $neworder);
+            $DB->update_record('block_my_enrolled_courses_order', $neworder);
         }
 
         return json_encode($neworder);

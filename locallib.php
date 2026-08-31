@@ -39,7 +39,7 @@ function block_my_enrolled_courses_show_courses($courseids) {
         $DB->delete_records('block_my_enrolled_courses', ['userid' => $USER->id, 'courseid' => $courseid, 'hide' => 1]);
     }
 
-    $coursesorder = $DB->get_record('block_myenrolledcoursesorder', ['userid' => $USER->id]);
+    $coursesorder = $DB->get_record('block_my_enrolled_courses_order', ['userid' => $USER->id]);
     if (!empty($coursesorder) && is_string($coursesorder->courseorder)) {
         $coursesinorder = json_decode($coursesorder->courseorder, true);
         $coursesdiff = array_diff($courseids, $coursesinorder);
@@ -47,13 +47,13 @@ function block_my_enrolled_courses_show_courses($courseids) {
             $record = new stdClass();
             $record->id = $coursesorder->id;
             $record->courseorder = json_encode(array_merge($courseids, $coursesinorder));
-            $DB->update_record('block_myenrolledcoursesorder', $record);
+            $DB->update_record('block_my_enrolled_courses_order', $record);
         }
     } else {
         $record = new stdClass();
         $record->userid = $USER->id;
         $record->courseorder = json_encode($courseids);
-        $DB->insert_record('block_myenrolledcoursesorder', $record);
+        $DB->insert_record('block_my_enrolled_courses_order', $record);
     }
 }
 
@@ -85,13 +85,13 @@ function block_my_enrolled_courses_hide_courses($courseids) {
         }
     }
 
-    $coursesorder = $DB->get_record('block_myenrolledcoursesorder', ['userid' => $USER->id]);
+    $coursesorder = $DB->get_record('block_my_enrolled_courses_order', ['userid' => $USER->id]);
     if (!empty($coursesorder) && is_string($coursesorder->courseorder)) {
         $coursesinorder = json_decode($coursesorder->courseorder, true);
         $record = new stdClass();
         $record->id = $coursesorder->id;
         $record->courseorder = json_encode(array_values(array_diff($coursesinorder, $courseids)));
-        $DB->update_record('block_myenrolledcoursesorder', $record);
+        $DB->update_record('block_my_enrolled_courses_order', $record);
     } else {
         $enroledcourses = enrol_get_my_courses();
         $visiblecourses = [];
@@ -105,7 +105,7 @@ function block_my_enrolled_courses_hide_courses($courseids) {
         $record = new stdClass();
         $record->userid = $USER->id;
         $record->courseorder = json_encode($visiblecourses);
-        $DB->insert_record('block_myenrolledcoursesorder', $record);
+        $DB->insert_record('block_my_enrolled_courses_order', $record);
     }
 }
 
@@ -198,7 +198,7 @@ function block_my_enrolled_courses_visible_in_block() {
     $enroledcourses = enrol_get_my_courses();
     block_my_enrolled_courses_manage_courses($enroledcourses);
 
-    $coursesorder = $DB->get_record('block_myenrolledcoursesorder', ['userid' => $USER->id]);
+    $coursesorder = $DB->get_record('block_my_enrolled_courses_order', ['userid' => $USER->id]);
     $coursesinorder = [];
     if (!empty($coursesorder) && is_string($coursesorder->courseorder)) {
         $coursesinorder = json_decode($coursesorder->courseorder, true);
@@ -295,7 +295,7 @@ function block_my_enrolled_courses_manage_courses($enroledcourses) {
         }
     }
 
-    $courseinorderobj = $DB->get_record('block_myenrolledcoursesorder', ['userid' => $USER->id]);
+    $courseinorderobj = $DB->get_record('block_my_enrolled_courses_order', ['userid' => $USER->id]);
     if (!empty($courseinorderobj)) {
         $courseinorder = json_decode($courseinorderobj->courseorder, true);
         $removed = array_diff($courseinorder, $enroledcourseids);
@@ -309,12 +309,12 @@ function block_my_enrolled_courses_manage_courses($enroledcourses) {
             $neworder = new stdClass();
             $neworder->id = $courseinorderobj->id;
             $neworder->courseorder = json_encode(array_values($result));
-            $DB->update_record('block_myenrolledcoursesorder', $neworder);
+            $DB->update_record('block_my_enrolled_courses_order', $neworder);
         }
     } else {
         $neworder = new stdClass();
         $neworder->userid = $USER->id;
         $neworder->courseorder = json_encode($enroledcourseids);
-        $DB->insert_record('block_myenrolledcoursesorder', $neworder);
+        $DB->insert_record('block_my_enrolled_courses_order', $neworder);
     }
 }
