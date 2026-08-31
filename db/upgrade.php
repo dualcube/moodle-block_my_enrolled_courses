@@ -21,6 +21,13 @@
  * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+/**
+ * Upgrade steps for block_my_enrolled_courses.
+ *
+ * @param int $oldversion The version we are upgrading from.
+ * @return bool
+ */
 function xmldb_block_my_enrolled_courses_upgrade($oldversion) {
     global $DB;
 

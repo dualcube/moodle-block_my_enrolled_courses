@@ -34,10 +34,9 @@ use core_privacy\local\request\writer;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
-        \core_privacy\local\metadata\provider,
-        \core_privacy\local\request\core_userlist_provider,
-        \core_privacy\local\request\plugin\provider {
-
+    \core_privacy\local\metadata\provider,
+    \core_privacy\local\request\core_userlist_provider,
+    \core_privacy\local\request\plugin\provider {
     /**
      * Returns information about the user data stored by this plugin.
      *
@@ -96,8 +95,10 @@ class provider implements
             return;
         }
 
-        if ($DB->record_exists('block_my_enrolled_courses', ['userid' => $context->instanceid])
-                || $DB->record_exists('block_myenrolledcoursesorder', ['userid' => $context->instanceid])) {
+        if (
+            $DB->record_exists('block_my_enrolled_courses', ['userid' => $context->instanceid])
+                || $DB->record_exists('block_myenrolledcoursesorder', ['userid' => $context->instanceid])
+        ) {
             $userlist->add_user($context->instanceid);
         }
     }
@@ -116,8 +117,12 @@ class provider implements
                 continue;
             }
 
-            $hiddencourses = $DB->get_records('block_my_enrolled_courses', ['userid' => $context->instanceid],
-                '', 'id, courseid, hide');
+            $hiddencourses = $DB->get_records(
+                'block_my_enrolled_courses',
+                ['userid' => $context->instanceid],
+                '',
+                'id, courseid, hide'
+            );
             $order = $DB->get_record('block_myenrolledcoursesorder', ['userid' => $context->instanceid]);
 
             if (empty($hiddencourses) && empty($order)) {
@@ -126,7 +131,7 @@ class provider implements
 
             $data = [];
             if (!empty($hiddencourses)) {
-                $data['hiddencourses'] = array_map(function($record) {
+                $data['hiddencourses'] = array_map(function ($record) {
                     return (object) [
                         'courseid' => $record->courseid,
                         'hidden' => transform::yesno($record->hide),

@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $functions = [
     'block_my_enrolled_courses_shorting' => [
         'classname' => 'block_my_enrolled_courses\external\shorting',

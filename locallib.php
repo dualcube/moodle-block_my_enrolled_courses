@@ -71,8 +71,10 @@ function block_my_enrolled_courses_hide_courses($courseids) {
     }
 
     foreach ($courseids as $courseid) {
-        $hiddencourse = $DB->get_record('block_my_enrolled_courses',
-            ['userid' => $USER->id, 'courseid' => $courseid, 'hide' => 1]);
+        $hiddencourse = $DB->get_record(
+            'block_my_enrolled_courses',
+            ['userid' => $USER->id, 'courseid' => $courseid, 'hide' => 1]
+        );
 
         if (empty($hiddencourse)) {
             $course = new stdClass();
@@ -120,8 +122,10 @@ function block_my_enrolled_courses_get_visible_courses() {
 
     if (!empty($enroledcourses)) {
         foreach ($enroledcourses as $id => $course) {
-            $hiddencourse = $DB->get_record('block_my_enrolled_courses',
-                ['userid' => $USER->id, 'courseid' => $id, 'hide' => 1]);
+            $hiddencourse = $DB->get_record(
+                'block_my_enrolled_courses',
+                ['userid' => $USER->id, 'courseid' => $id, 'hide' => 1]
+            );
             if (empty($hiddencourse)) {
                 $visiblecourses[$id] = $course;
             }
@@ -157,8 +161,10 @@ function block_my_enrolled_courses_get_hidden_courses() {
 
     if (!empty($enroledcourses)) {
         foreach ($enroledcourses as $id => $course) {
-            $hiddencourse = $DB->get_record('block_my_enrolled_courses',
-                ['userid' => $USER->id, 'courseid' => $id, 'hide' => 1]);
+            $hiddencourse = $DB->get_record(
+                'block_my_enrolled_courses',
+                ['userid' => $USER->id, 'courseid' => $id, 'hide' => 1]
+            );
             if (!empty($hiddencourse)) {
                 $hiddencourses[$id] = $course;
             }
@@ -209,8 +215,10 @@ function block_my_enrolled_courses_visible_in_block() {
             $url = new moodle_url($CFG->wwwroot . '/course/view.php', ['id' => $id]);
             $content = html_writer::start_tag('div', ['class' => 'li_course', 'data-id' => $id]);
             $anchor = html_writer::link($url, format_string($courses[$id]->fullname));
-            $dragable = html_writer::start_tag('span',
-                ['role' => 'button', 'aria-haspopup' => 'false', 'data-drag-type' => 'move']);
+            $dragable = html_writer::start_tag(
+                'span',
+                ['role' => 'button', 'aria-haspopup' => 'false', 'data-drag-type' => 'move']
+            );
             $dragable .= html_writer::start_tag('i', ['class' => 'fa fa-arrows']);
             $dragable .= html_writer::end_tag('i');
             $dragable .= html_writer::end_tag('span');

@@ -29,7 +29,7 @@ $courseid = optional_param('courseid', SITEID, PARAM_INT);
 $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
 $contextid = required_param('contextid', PARAM_INT);
 $url = new moodle_url('/blocks/my_enrolled_courses/showhide.php', ['contextid' => $contextid]);
-list($context, $unused, $cm) = get_context_info_array($contextid);
+[$context, $unused, $cm] = get_context_info_array($contextid);
 
 require_login($course, false, $cm);
 
@@ -71,8 +71,11 @@ $html .= html_writer::start_tag('tr');
 
 $html .= html_writer::start_tag('td', ['id' => 'visiblecourses', 'class' => 'block_my_enrolled_courses']);
 $html .= html_writer::start_tag('div');
-$html .= html_writer::tag('label', html_writer::tag('b', get_string('visible_lable', 'block_my_enrolled_courses')),
-    ['for' => 'visible']);
+$html .= html_writer::tag(
+    'label',
+    html_writer::tag('b', get_string('visible_lable', 'block_my_enrolled_courses')),
+    ['for' => 'visible']
+);
 $html .= html_writer::end_tag('div');
 $html .= html_writer::start_tag('div');
 $html .= html_writer::start_tag('select', ['name' => 'visible[]', 'id' => 'visible', 'multiple' => 'multiple', 'size' => 20]);
@@ -94,8 +97,11 @@ $html .= html_writer::end_tag('td');
 
 $html .= html_writer::start_tag('td', ['id' => 'hiddencourses', 'class' => 'block_my_enrolled_courses']);
 $html .= html_writer::start_tag('div');
-$html .= html_writer::tag('label', html_writer::tag('b', get_string('hidden_lable', 'block_my_enrolled_courses')),
-    ['for' => 'hidden']);
+$html .= html_writer::tag(
+    'label',
+    html_writer::tag('b', get_string('hidden_lable', 'block_my_enrolled_courses')),
+    ['for' => 'hidden']
+);
 $html .= html_writer::end_tag('div');
 $html .= html_writer::start_tag('div');
 $html .= html_writer::start_tag('select', ['name' => 'hidden[]', 'id' => 'hidden', 'multiple' => 'multiple', 'size' => 20]);

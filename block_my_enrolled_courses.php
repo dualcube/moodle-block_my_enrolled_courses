@@ -25,15 +25,31 @@
 defined('MOODLE_INTERNAL') || die();
 require_once('locallib.php');
 
+/**
+ * My enrolled courses block class.
+ *
+ * @package    block_my_enrolled_courses
+ * @copyright  DualCube (https://dualcube.com)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class block_my_enrolled_courses extends block_base {
+    /**
+     * Initialise the block title.
+     *
+     * @return void
+     */
     public function init() {
         $this->title = get_string('pluginname', 'block_my_enrolled_courses');
     }
 
+    /**
+     * Build the block content.
+     *
+     * @return stdClass
+     */
     public function get_content() {
-        global $PAGE;
-        $PAGE->requires->js_call_amd('block_my_enrolled_courses/myenrolledcourses', 'sorting');
-        $PAGE->requires->css('/blocks/my_enrolled_courses/style.css');
+        $this->page->requires->js_call_amd('block_my_enrolled_courses/myenrolledcourses', 'sorting');
+        $this->page->requires->css('/blocks/my_enrolled_courses/style.css');
 
         if ($this->content !== null) {
             return $this->content;
