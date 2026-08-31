@@ -31,7 +31,7 @@ class block_my_enrolled_courses extends block_base {
     }
 
     public function get_content() {
-        global $CFG, $PAGE;
+        global $PAGE;
         $PAGE->requires->js_call_amd('block_my_enrolled_courses/myenrolledcourses', 'sorting');
         $PAGE->requires->css('/blocks/my_enrolled_courses/style.css');
 
@@ -40,15 +40,10 @@ class block_my_enrolled_courses extends block_base {
         }
 
         $this->content = new stdClass();
+        $this->content->text = block_my_enrolled_courses_visible_in_block();
 
-        if (function_exists('block_my_enrolled_courses_visible_in_block')) {
-            $html = block_my_enrolled_courses_visible_in_block();
-            $this->content->text = $html;
-        }
-        $url = new moodle_url($CFG->wwwroot . '/blocks/my_enrolled_courses/showhide.php', array('contextid' => $this->context->id));
-        $showhidetext = get_string('showhide', 'block_my_enrolled_courses');
-        $link = html_writer::link($url, $showhidetext);
-        $this->content->footer = $link;
+        $url = new moodle_url('/blocks/my_enrolled_courses/showhide.php', ['contextid' => $this->context->id]);
+        $this->content->footer = html_writer::link($url, get_string('showhide', 'block_my_enrolled_courses'));
 
         return $this->content;
     }

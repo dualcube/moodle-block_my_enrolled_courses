@@ -25,7 +25,7 @@ You can hide the ones you are done with and change their visibility again, if ne
 One click on a course link will redirect to that particular course page. 
 It also provides quick links to the course modules in which you are enrolled.
 
-This version can be used with Moodle 3.2 to 4.2 and ulterior versions.
+This version requires Moodle 4.2 or later, and has been tested up to Moodle 5.3.
 
 Special Features:-
 ----------------

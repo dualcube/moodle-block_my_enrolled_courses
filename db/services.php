@@ -22,22 +22,22 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$services = array(
-    'moodle_block_my_enrolled_courses' => array(
-        'functions' => array('moodle_my_enrolled_courses_shorting'),
+$functions = [
+    'block_my_enrolled_courses_shorting' => [
+        'classname' => 'block_my_enrolled_courses\external\shorting',
+        'methodname' => 'execute',
+        'description' => 'Save the display order of the current user\'s enrolled courses.',
+        'type' => 'write',
+        'ajax' => true,
+        'loginrequired' => true,
+    ],
+];
+
+$services = [
+    'block_my_enrolled_courses' => [
+        'functions' => ['block_my_enrolled_courses_shorting'],
         'requiredcapability' => '',
         'restrictedusers' => 0,
         'enabled' => 1,
-    )
-);
-$functions = array(
-    'moodle_my_enrolled_courses_shorting' => array(
-        'classname' => 'moodle_my_enrolled_courses_shorting_external',
-        'methodname' => 'my_enrolled_courses_shorting',
-        'classpath' => 'blocks/my_enrolled_courses/externallib.php',
-        'description' => 'Get shorting data',
-        'type' => 'read',
-        'ajax' => true,
-        'loginrequired' => true
-    )
-);
+    ],
+];

@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_my_enrolled_courses';
-$plugin->version   = 2023101000;
-$plugin->requires  = 2016120500;
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.7.1 (Build: 2023101000)';
+$plugin->version   = 2026083101;
+$plugin->requires  = 2023042400; // Moodle 4.2, needed for the core_external namespace.
+$plugin->maturity  = MATURITY_STABLE;
+$plugin->release   = '2.8.1 (Build: 2026083101)';

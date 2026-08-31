@@ -1,0 +1,36 @@
+{
+    "name": "moodle/block_my_enrolled_courses",
+    "description": "My enrolled courses block plugin for Moodle",
+    "type": "moodle-block",
+    "license": "GPL-3.0-or-later",
+    "homepage": "https://dualcube.com",
+    "authors": [
+        {
+            "name": "DualCube <admin@dualcube.com>",
+            "homepage": "https://dualcube.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "block_my_enrolled_courses\\": "classes/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require-dev": {
+        "moodlehq/moodle-cs": "^3.2",
+        "phpcompatibility/php-compatibility": "^9.3",
+        "squizlabs/php_codesniffer": "^3.13"
+    },
+    "scripts": {
+        "zip": "zip -r release/my_enrolled_courses.zip my_enrolled_courses -x@exclude.lst",
+        "phpcs": "vendor/bin/phpcs --standard=Moodle --ignore=vendor/*,.git/* .",
+        "phpcf": "vendor/bin/phpcbf --standard=Moodle --ignore=vendor/*,.git/* ."
+    }
+}
