@@ -2,7 +2,7 @@
 
 A Moodle Dashboard block that gives students and staff a single, sortable, show/hide-able list of everything they're enrolled in — with one-click access to each course's activities, right from the block.
 
-[![Moodle Plugin CI](https://github.com/vulopilot/moodle-block_my_enrolled_courses/actions/workflows/moodle-plugin-ci.yml/badge.svg)](https://github.com/vulopilot/moodle-block_my_enrolled_courses/actions/workflows/moodle-plugin-ci.yml)
+[![Moodle Plugin CI](https://github.com/dualcube/moodle-block_my_enrolled_courses/actions/workflows/moodle-plugin-ci.yml/badge.svg)](https://github.com/dualcube/moodle-block_my_enrolled_courses/actions/workflows/moodle-plugin-ci.yml)
 ![Moodle](https://img.shields.io/badge/Moodle-5.0%20--%205.3-orange.svg)
 [![License: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/copyleft/gpl.html)
 
