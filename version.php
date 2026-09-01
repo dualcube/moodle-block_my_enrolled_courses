@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_my_enrolled_courses';
-$plugin->version   = 2026083102;
+$plugin->version   = 2026083103;
 $plugin->requires  = 2023100900; // Moodle 4.3, needed for table names longer than 28 characters.
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '2.8.2 (Build: 2026083102)';
+$plugin->release   = '2.8.3 (Build: 2026083103)';

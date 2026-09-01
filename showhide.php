@@ -23,7 +23,8 @@
  */
 
 require_once('../../config.php');
-require_once('locallib.php');
+
+use block_my_enrolled_courses\course_list;
 
 $courseid = optional_param('courseid', SITEID, PARAM_INT);
 $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
@@ -48,7 +49,7 @@ $PAGE->requires->css('/blocks/my_enrolled_courses/style.css');
 if (optional_param('show', false, PARAM_BOOL) && confirm_sesskey()) {
     $hidden = optional_param_array('hidden', [], PARAM_INT);
     if (!empty($hidden)) {
-        block_my_enrolled_courses_show_courses($hidden);
+        course_list::show_courses($hidden);
     }
 }
 
@@ -56,7 +57,7 @@ if (optional_param('show', false, PARAM_BOOL) && confirm_sesskey()) {
 if (optional_param('hide', false, PARAM_BOOL) && confirm_sesskey()) {
     $visible = optional_param_array('visible', [], PARAM_INT);
     if (!empty($visible)) {
-        block_my_enrolled_courses_hide_courses($visible);
+        course_list::hide_courses($visible);
     }
 }
 
@@ -79,7 +80,7 @@ $html .= html_writer::tag(
 $html .= html_writer::end_tag('div');
 $html .= html_writer::start_tag('div');
 $html .= html_writer::start_tag('select', ['name' => 'visible[]', 'id' => 'visible', 'multiple' => 'multiple', 'size' => 20]);
-$html .= block_my_enrolled_courses_get_visible_courses();
+$html .= course_list::visible_options();
 $html .= html_writer::end_tag('select');
 $html .= html_writer::end_tag('div');
 $html .= html_writer::end_tag('td');
@@ -105,7 +106,7 @@ $html .= html_writer::tag(
 $html .= html_writer::end_tag('div');
 $html .= html_writer::start_tag('div');
 $html .= html_writer::start_tag('select', ['name' => 'hidden[]', 'id' => 'hidden', 'multiple' => 'multiple', 'size' => 20]);
-$html .= block_my_enrolled_courses_get_hidden_courses();
+$html .= course_list::hidden_options();
 $html .= html_writer::end_tag('select');
 $html .= html_writer::end_tag('div');
 $html .= html_writer::end_tag('td');

@@ -22,8 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-require_once('locallib.php');
+use block_my_enrolled_courses\course_list;
 
 /**
  * My enrolled courses block class.
@@ -56,7 +55,7 @@ class block_my_enrolled_courses extends block_base {
         }
 
         $this->content = new stdClass();
-        $this->content->text = block_my_enrolled_courses_visible_in_block();
+        $this->content->text = course_list::render();
 
         $url = new moodle_url('/blocks/my_enrolled_courses/showhide.php', ['contextid' => $this->context->id]);
         $this->content->footer = html_writer::link($url, get_string('showhide', 'block_my_enrolled_courses'));
