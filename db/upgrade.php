@@ -21,23 +21,39 @@
  * @copyright  DualCube (https://dualcube.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+/**
+ * Upgrade steps for block_my_enrolled_courses.
+ *
+ * @param int $oldversion The version we are upgrading from.
+ * @return bool
+ */
 function xmldb_block_my_enrolled_courses_upgrade($oldversion) {
-    global $CFG, $DB;
-    
+    global $DB;
+
     $dbman = $DB->get_manager();
-    
+
     if ($oldversion < 2014102202) {
         $table = new xmldb_table('block_myenrolledcoursesorder');
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
         $table->add_field('courseorder', XMLDB_TYPE_TEXT, 'long', null, XMLDB_NOTNULL, null, null);
-        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
-        $table->add_index('userid', XMLDB_INDEX_NOTUNIQUE, array('userid'));
-        if (! $dbman->table_exists($table)) {
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+        $table->add_index('userid', XMLDB_INDEX_NOTUNIQUE, ['userid']);
+        if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
         }
         upgrade_block_savepoint(true, 2014102202, 'my_enrolled_courses');
     }
-    
+
+    if ($oldversion < 2026090100) {
+        // Renamed to be prefixed with the full component name, as required by the plugin validator.
+        $oldtable = new xmldb_table('block_myenrolledcoursesorder');
+        if ($dbman->table_exists($oldtable) && !$dbman->table_exists('block_my_enrolled_courses_order')) {
+            $dbman->rename_table($oldtable, 'block_my_enrolled_courses_order');
+        }
+        upgrade_block_savepoint(true, 2026090100, 'my_enrolled_courses');
+    }
+
     return true;
 }

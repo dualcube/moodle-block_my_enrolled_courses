@@ -24,8 +24,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$plugin->version = 2026090100;
+$plugin->requires = 2025041400;
+// Tested against Moodle 5.0 through 5.3, including the 5.3dev branch (branches 500-530).
+$plugin->supported = [500, 530];
 $plugin->component = 'block_my_enrolled_courses';
-$plugin->version   = 2023101000;
-$plugin->requires  = 2016120500;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.7.1 (Build: 2023101000)';
+$plugin->release = '2.8.0 (Build: 2026090100)';
