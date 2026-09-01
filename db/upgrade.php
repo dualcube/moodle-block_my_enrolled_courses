@@ -46,13 +46,13 @@ function xmldb_block_my_enrolled_courses_upgrade($oldversion) {
         upgrade_block_savepoint(true, 2014102202, 'my_enrolled_courses');
     }
 
-    if ($oldversion < 2026083102) {
+    if ($oldversion < 2026090100) {
         // Renamed to be prefixed with the full component name, as required by the plugin validator.
         $oldtable = new xmldb_table('block_myenrolledcoursesorder');
         if ($dbman->table_exists($oldtable) && !$dbman->table_exists('block_my_enrolled_courses_order')) {
             $dbman->rename_table($oldtable, 'block_my_enrolled_courses_order');
         }
-        upgrade_block_savepoint(true, 2026083102, 'my_enrolled_courses');
+        upgrade_block_savepoint(true, 2026090100, 'my_enrolled_courses');
     }
 
     return true;
